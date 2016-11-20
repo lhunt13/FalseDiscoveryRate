@@ -3,9 +3,16 @@
 # You can find out more about building applications with Shiny here:
 #
 # http://shiny.rstudio.com
+
+# test3
+# test2
 #
 # test3
+<<<<<<< HEAD
 # test4 lamar
+=======
+
+>>>>>>> b96388adc84c49203de8426aa08a27bcf593e287
 library(shiny)
 
 shinyUI(fluidPage(
