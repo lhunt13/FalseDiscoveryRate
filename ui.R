@@ -4,7 +4,7 @@
 #
 # http://shiny.rstudio.com
 #
-# test
+# test2
 library(shiny)
 
 shinyUI(fluidPage(
