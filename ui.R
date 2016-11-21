@@ -31,6 +31,8 @@ shinyUI(fluidPage(
                   )
         
       ),
-    mainPanel("main panel")
+    
+    #LH: PK's plot feeds into here
+    mainPanel(plotOutput("plot"))
     )
 ))

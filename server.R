@@ -8,5 +8,15 @@
 library(shiny)
 
 shinyServer(function(input, output) {
+  
+  dataInput <- reactive({
+    x <- 1
+  })
+  
+  
+  ##LH: 
+  output$plot <- renderPlot({
+    plot(dataInput())
+  })
 
 })
