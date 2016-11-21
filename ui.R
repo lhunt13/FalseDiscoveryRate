@@ -18,21 +18,19 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("False Discovery Rate Calculator"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
-    ),
-
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput("distPlot")
+      selectInput("discipline","Choose a Discipline",
+                  choices = list("Choice 1" = 1,
+                                 "Choice 2" = 2,
+                                 "Choice 3" = 3),
+                  selected = 1
+                  )
+        
+      ),
+    mainPanel("main panel")
     )
-  )
 ))
