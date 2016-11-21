@@ -1,22 +1,26 @@
-# A
-# This is the server logic for a Shiny web application.
-# You can find out more about building applications with Shiny here:
-#
-# http://shiny.rstudio.com
-#
+# LH: I think we should split up "getPvals" and "calcFDR" because
+# then we can make our app more flexible if we add other methods
+# for user input, like uploading a paper
 
 library(shiny)
 
 shinyServer(function(input, output) {
   
-  dataInput <- reactive({
-    x <- 1
-  })
+  #LH: this function should get the user inputs and
+  # produce a vector of p-values
+  # "getPvals"
   
   
-  ##LH: 
+  
+  #LH: this function should take a vector of p-values and 
+  # spit out a FDR
+  # "calcFDR"
+  
+  
+  
+  #LH: output a plot here
   output$plot <- renderPlot({
-    plot(dataInput())
+    plot(1)
   })
 
 })

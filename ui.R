@@ -4,14 +4,6 @@
 #
 # http://shiny.rstudio.com
 
-# test3
-# test2
-#
-# test3 Prosenjit
-
-# test4 lamar
-
-
 
 library(shiny)
 
@@ -20,7 +12,7 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("False Discovery Rate Calculator"),
 
-  # Sidebar with a slider input for number of bins
+  # Sidebar with user inputs
   sidebarLayout(
     sidebarPanel(
       selectInput("discipline","Choose a Discipline",
