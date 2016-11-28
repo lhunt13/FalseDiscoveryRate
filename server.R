@@ -11,7 +11,6 @@ shinyServer(function(input, output) {
   # "getPvals"
   
   
-  
   #LH: this function should take a vector of p-values and 
   # spit out a FDR
   # "calcFDR"

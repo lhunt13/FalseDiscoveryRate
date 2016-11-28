@@ -15,7 +15,7 @@ shinyUI(fluidPage(
   # Sidebar with user inputs
   sidebarLayout(
     sidebarPanel(
-      selectInput("discipline","Choose a Discipline",
+      selectInput("discipline","Choose a Journal",
                   choices = list("Choice 1" = 1,
                                  "Choice 2" = 2,
                                  "Choice 3" = 3),
