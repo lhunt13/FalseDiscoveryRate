@@ -16,8 +16,8 @@ shinyServer(function(input, output) {
   #LH: this function should take a vector of p-values and 
   # spit out a FDR
   # "calcFDR"
-  source("calfdr.R")
-  fdrdata <- calFDR(df)
+  # source("calfdr.R")
+  # fdrdata <- calFDR(df)
   
   
   #LH: output a plot here
