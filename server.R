@@ -3,6 +3,7 @@
 # for user input, like uploading a paper
 
 library(shiny)
+source("makeplots.R") #PK
 
 shinyServer(function(input, output) {
   
@@ -19,7 +20,7 @@ shinyServer(function(input, output) {
   
   #LH: output a plot here
   output$plot <- renderPlot({
-    plot(1)
+    makeplot(fdrdata) #---fdrdata <- calfdr(df)---#
   })
 
 })
