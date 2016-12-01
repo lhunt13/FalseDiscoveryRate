@@ -15,12 +15,20 @@ shinyUI(fluidPage(
   # Sidebar with user inputs
   sidebarLayout(
     sidebarPanel(
-      selectInput("discipline","Choose a Journal",
-                  choices = list("Choice 1" = 1,
-                                 "Choice 2" = 2,
-                                 "Choice 3" = 3),
-                  selected = 1
-                  )
+      
+      p("Select the journal(s) and year(s) for which you want to see the False Discovery Rates."),
+      
+      checkboxGroupInput("journals",
+        label = "Select Journal(s)",
+        choices = list("JAMA", 
+                       "New England Journal of Medicine",
+                       "BMJ",
+                       "American Journal of Epidemiology",
+                       "Lancet")
+      ),
+      
+      sliderInput("years", label = h3("Year of publication"),
+                  min = 2000, max = 2010, value = c(2004,2006))
         
       ),
     
