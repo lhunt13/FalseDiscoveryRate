@@ -16,7 +16,9 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       
-      p("Select the journal(s) and year(s) for which you want to see the False Discovery Rates."),
+      p("Select the journal(s) and year(s) for which you want to see the False Discovery Rates. The False
+        Discovery rate is calculated from the significant p-values in the selected papers using the 
+        method"),
       
       checkboxGroupInput("journals",
         label = "Select Journal(s)",
