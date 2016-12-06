@@ -26,7 +26,8 @@ shinyUI(fluidPage(
                        "New England Journal of Medicine",
                        "BMJ",
                        "American Journal of Epidemiology",
-                       "Lancet")
+                       "Lancet"),
+        selected = "JAMA"
       ),
       
       sliderInput("years", label = h3("Year of publication"),
@@ -34,7 +35,11 @@ shinyUI(fluidPage(
         
       ),
     
-    #LH: PK's plot feeds into here
-    mainPanel(plotOutput("plot"))
+    mainPanel(
+      tabsetPanel(type = "tabs",
+                  tabPanel("Plot", plotOutput("plot")),
+                  tabPanel("Dataset", DT::dataTableOutput("table"))
+      )
     )
+  )
 ))
