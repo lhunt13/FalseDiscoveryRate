@@ -38,8 +38,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(type = "tabs",
                   tabPanel("Plot", plotOutput("plot")),
-                  tabPanel("Dataset", DT::dataTableOutput("table")),
-                  tabPanel("Hisogram". plotOuput("hist"))
+                  tabPanel("Dataset", DT::dataTableOutput("table"))
       )
     )
   )
