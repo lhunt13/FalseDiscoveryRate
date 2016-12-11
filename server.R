@@ -7,6 +7,7 @@ fdrdata <- read.csv("fdrdata.csv")
 
 shinyServer(function(input, output) {
 
+  #gives dataframe with FDRs and posterior pvals computed by journal 
   dataInput_FDR <- reactive({
    input_data <- pvalueData[row.names(pvalueData) %in% input$journals & 
                               year >= input$years[1] & 
@@ -15,18 +16,19 @@ shinyServer(function(input, output) {
    
   })
   
+  #gives table to place in DataTable tab
   dataInput_outtable <- reactive({
     subset(fulldata, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
   })
   
-  
+  #plots FDR by year and by journal
   output$plot <- renderPlot({
     fdrdata <- subset(fdrdata, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
     makeplot(fdrdata) #---fdrdata <- calfdr(df)---#
   })
   
   
-  # Output table -- for now, there is a "test" table as a placeholder until we get the table we will output
+  #makes DataTable for user to search
   output$table <- DT::renderDataTable({
     test <- data.frame(journal = rep(c("JAMA", 
                                        "New England Journal of Medicine",
@@ -39,7 +41,7 @@ shinyServer(function(input, output) {
     #DT::datatable(dataInput_outtable)
   })
   
-  # Histogram of pre and post p-values
+  #gives histogram of pre and post p-values
   output$hist <- renderPlot({
     data1 <- dataInput_FDR()
     data2 <- dataInput_outtable()
