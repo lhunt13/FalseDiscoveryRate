@@ -3,15 +3,31 @@ library(ggplot2)
 library(DT)
 
 source("makeplots.R") #PK
+
 FDRbyYEAR <- read.csv("fdrdata.csv")
+
+source("calfdr_v2.R") #KS
+
+
 
 shinyServer(function(input, output) {
 
   #gives dataframe with FDRs and posterior pvals computed by journal 
   dataInput_FDR <- reactive({
+    
    input_data <- pvalueData[row.names(pvalueData) %in% input$journals & 
                               year >= input$years[1] & 
                               year <= input$years[2],]
+   
+   # Create a list of subsetted matrices
+   my_data <- my_pvalueData(input_data)
+   
+   # Calculate both the swfdr and the ppv 
+   fdrdata <- calFDR(my_pvalueData)
+   
+   # Result
+   fdrdata
+   
    
    
   })
