@@ -3,7 +3,7 @@ library(ggplot2)
 library(DT)
 
 source("makeplots.R") #PK
-fdrdata <- read.csv("fdrdata.csv")
+FDRbyYEAR <- read.csv("fdrdata.csv")
 
 shinyServer(function(input, output) {
 
@@ -23,8 +23,8 @@ shinyServer(function(input, output) {
   
   #plots FDR by year and by journal
   output$plot <- renderPlot({
-    fdrdata <- subset(fdrdata, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
-    makeplot(fdrdata) #---fdrdata <- calfdr(df)---#
+    FDRbyYEAR <- subset(FDRbyYEAR, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
+    makeplot(FDRbyYEAR) #---FDRbyYEAR <- calfdr(df)---#
   })
   
   
@@ -38,6 +38,7 @@ shinyServer(function(input, output) {
     outputtable <- subset(test, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
     DT::datatable(outputtable)
     
+    data <- dataInput_FDR()
     #DT::datatable(dataInput_outtable)
   })
   
@@ -51,3 +52,4 @@ shinyServer(function(input, output) {
   })
   
 })
+
