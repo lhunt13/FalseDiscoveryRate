@@ -6,6 +6,19 @@ source("makeplots.R") #PK
 fdrdata <- read.csv("fdrdata.csv")
 
 shinyServer(function(input, output) {
+
+  dataInput_FDR <- reactive({
+   input_data <- pvalueData[row.names(pvalueData) %in% input$journals & 
+                              year >= input$years[1] & 
+                              year <= input$years[2],]
+   
+   
+  })
+  
+  dataInput_outtable <- reactive({
+    subset(fulldata, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
+  })
+  
   
   output$plot <- renderPlot({
     fdrdata <- subset(fdrdata, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
@@ -22,6 +35,17 @@ shinyServer(function(input, output) {
                                        "Lancet"),10), year = rep(2000:2009, 5))
     outputtable <- subset(test, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
     DT::datatable(outputtable)
+    
+    #DT::datatable(dataInput_outtable)
+  })
+  
+  # Histogram of pre and post p-values
+  output$hist <- renderPlot({
+    data1 <- dataInput_FDR()
+    data2 <- dataInput_outtable()
+    
+    hist(data1$ppv, by=journal)
+    hist(data2$pvals, by=journal)
   })
   
 })

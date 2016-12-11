@@ -31,8 +31,8 @@ shinyUI(fluidPage(
       ),
       
       sliderInput("years", label = h3("Year of publication"),
-                  min = 2000, max = 2010, value = c(2004,2006))
-        
+                  min = 2000, max = 2010, 
+                  value = c(2004,2005))
       ),
     
     mainPanel(
