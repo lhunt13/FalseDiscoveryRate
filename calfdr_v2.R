@@ -92,5 +92,6 @@ calFDR <- function(df){
   # return(list(plot.data = plot.dat, data.table = data.table))
   out.results <- inner_join(data.table, plot.dat) %>%
     select(journal, swfdr, pvalue, ppv, pubmedID, year, range)
+  out.results <- as.data.frame(out.results)
   return(out.results)
 }
