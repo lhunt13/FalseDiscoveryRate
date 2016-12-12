@@ -1,6 +1,8 @@
 library(shiny)
 library(ggplot2)
 library(DT)
+library(plyr)
+library(dplyr)
 
 source("makeplots.R") #PK
 
@@ -13,7 +15,7 @@ shinyServer(function(input, output) {
   #gives dataframe with FDRs and posterior pvals computed by journal 
   dataInput_FDR <- reactive({
     
-   input_data <- pvalueData[row.names(pvalueData) %in% input$journals & 
+   input_data <- pvalueData[row.names(pvalueData) %in% input$journals &
                               pvalueData[,4] %in% input$years[1]:input$years[2],]
 
    
@@ -22,21 +24,14 @@ shinyServer(function(input, output) {
    
    
    # Calculate both the swfdr and the ppv 
-   fdrdata <- calFDR(my_pvalueData)
-   
-   my_data
+   fdrdata <- calFDR(input_data)
+
    
    # Result
-   #fdrdata
-   
-   
+   fdrdata
    
   })
   
-  #gives table to place in DataTable tab
-  #dataInput_outtable <- reactive({
-  #  subset(fulldata, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
-  #})
   
   #plots FDR by year and by journal
   output$plot <- renderPlot({
@@ -44,17 +39,8 @@ shinyServer(function(input, output) {
     makeplot(FDRbyYEAR) #---FDRbyYEAR <- calfdr(df)---#
   })
   
-  
   #makes DataTable for user to search
   output$table <- DT::renderDataTable({
-    #test <- data.frame(journal = rep(c("JAMA", 
-    #                                   "New England Journal of Medicine",
-    #                                   "BMJ",
-    #                                   "American Journal of Epidemiology",
-    #                                   "Lancet"),10), year = rep(2000:2009, 5))
-    #outputtable <- subset(test, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
-    #DT::datatable(outputtable)
-    
     data_outtable <- dataInput_FDR()
     DT::datatable(data_outtable)
   })
