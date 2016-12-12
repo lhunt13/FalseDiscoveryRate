@@ -10,7 +10,7 @@ source("Hist.R") #PK
 FDRbyYEAR <- read.csv("fdrdata.csv")
 
 source("calfdr_v2.R") #KS
-
+load("pvalueData.rda")
 shinyServer(function(input, output) {
 
   #gives dataframe with FDRs and posterior pvals computed by journal 
@@ -45,6 +45,20 @@ shinyServer(function(input, output) {
   output$table <- DT::renderDataTable({
     data_outtable <- dataInput_FDR()
     DT::datatable(data_outtable)
+  })
+  
+  #summary output
+  output$summary <- renderTable({
+    overallFDRs <- dataInput_FDR()
+    FDRbyYEAR <- subset(FDRbyYEAR, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
+    
+    x <- matrix(nrow = length(input$journals), 
+                ncol = as.numeric(input$years[2]) - as.numeric(input$years[1]) + 3)
+    
+    rownames(x) <- paste(input$journals)
+    colnames(x) <- c("Journal",paste(input$years[1]:input$years[2]),paste(overallFDRs$range[1]))
+    x[,1] <- input$journals
+    print(x)
   })
   
   #gives histogram of pre and post p-values
