@@ -9,14 +9,23 @@
 # input_data <- pvalueData
 
 my_pvalueData <- function(input_data){
+  
   # Get the Journals
   data_list <- unique(row.names(input_data))
   
-  # Subset the input_dat by Journal
-  my_Data <- sapply(data_list, function(x)
-  {
-    input_data[row.names(input_data) == paste(x), ]
-  }, simplify = "list")
+  
+  if (length(data_list) > 1) {
+    # Subset the input_data by Journal
+    my_Data <- sapply(data_list, function(x)
+    {
+      input_data[row.names(input_data) == paste(x), ]
+    }, simplify = "list")
+    
+  }
+  else
+    my_Data <- list(input_data)
+  
+  
   
   return(my_Data)
 }
@@ -86,7 +95,7 @@ calFDR <- function(df){
                      pubmedID, year, abstract, title, ppv)
     return(re)
   })
-  data.table <- plyr::ldply (result, data.frame) 
+  data.table <- plyr::ldply(result, data.frame) 
   
   
   # return(list(plot.data = plot.dat, data.table = data.table))
