@@ -5,6 +5,7 @@ library(plyr)
 library(dplyr)
 
 source("makeplots.R") #PK
+source("Hist.R") #PK
 
 FDRbyYEAR <- read.csv("fdrdata.csv")
 
@@ -15,6 +16,7 @@ shinyServer(function(input, output) {
   #gives dataframe with FDRs and posterior pvals computed by journal 
   dataInput_FDR <- reactive({
     
+    load("pvalueData.rda")
    input_data <- pvalueData[row.names(pvalueData) %in% input$journals &
                               pvalueData[,4] %in% input$years[1]:input$years[2],]
 
@@ -46,13 +48,13 @@ shinyServer(function(input, output) {
   })
   
   #gives histogram of pre and post p-values
-  #output$hist <- renderPlot({
+  output$hist <- renderPlot({
   #  data1 <- dataInput_FDR()
-  #  data2 <- dataInput_outtable()
-    
+    data_hist <- dataInput_FDR()
+    makehist(data_hist)  
   #  hist(data1$ppv, by=journal)
   #  hist(data2$pvals, by=journal)
-  #})
+  })
   
 })
 
