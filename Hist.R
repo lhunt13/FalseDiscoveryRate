@@ -13,6 +13,6 @@ makehist <- function(x)
   dat3$Journal <- as.factor(dat3$Journal)
   #dat$Values <- as.numeric(dat$Values)
   dat3$Type<- as.factor(dat3$Type)
-ggplot(dat3, aes(x=Values, fill=Type, color=Type)) + 
+ggplot(dat3, aes(x=p-values, fill=Type, color=Type)) + 
   geom_histogram(position="identity", alpha=0.5) + facet_grid(Journal ~ .) 
 }
