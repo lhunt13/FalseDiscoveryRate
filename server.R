@@ -24,7 +24,7 @@ shinyServer(function(input, output) {
    
    
    # Calculate both the swfdr and the ppv 
-   fdrdata <- calFDR(input_data)
+   fdrdata <- calFDR(my_data)
 
    
    # Result

@@ -32,12 +32,16 @@ shinyUI(fluidPage(
       
       sliderInput("years", label = h3("Year of publication"),
                   min = 2000, max = 2010, 
-                  value = c(2004,2005))
+                  value = c(2004,2005)),
+      submitButton("Submit")
       ),
+
     
     mainPanel(
       tabsetPanel(type = "tabs",
-                  tabPanel("Plot", plotOutput("plot")),
+                  tabPanel("Summary"),
+                  tabPanel("Time Trend", plotOutput("plot")),
+                  tabPanel("Histogram"),
                   tabPanel("Dataset", DT::dataTableOutput("table"))
       )
     )
