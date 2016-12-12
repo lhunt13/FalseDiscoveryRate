@@ -23,9 +23,9 @@ shinyUI(fluidPage(
       checkboxGroupInput("journals",
         label = "Select Journal(s)",
         choices = list("JAMA", 
-                       "New England Journal of Medicine",
+                       "New England Journal of Medicine(NEJM)",
                        "BMJ",
-                       "American Journal of Epidemiology",
+                       "American Journal of Epidemiology(AJE)",
                        "Lancet"),
         selected = "JAMA"
       ),

@@ -4,7 +4,10 @@ makehist <- function(x)
   no_row <- nrow(x)
   #hist(as.numeric(x$ppv))
   prob <- c(rep("Prior",no_row), rep("Posterior", no_row))
-  a1 <- c(x$journal, x$journal)
+  xj <- x$journal
+  xj[xj == "New England Journal of Medicine"] = "NEJM"
+  xj[xj == "American Journal of Epidemiology"] = "AJE"
+  a1 <- c(xj, xj)
   a2 <- c(as.numeric(x$pvalue), as.numeric(x$ppv))
   dat1 <- data.frame(Journal = factor(a1), pvalues = a2, pvalue_type = factor(prob))
   #dat3 <- as.data.frame(dat2)
