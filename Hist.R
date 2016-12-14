@@ -1,21 +1,16 @@
 makehist <- function(x)
 {
-  #x <- as.data.frame(x)
   no_row <- nrow(x)
-  #hist(as.numeric(x$ppv))
-  prob <- c(rep("Prior",no_row), rep("Posterior", no_row))
+  Values <- c(rep("Observed p -values",no_row), rep("Local FDR", no_row))
   xj <- x$journal
   xj[xj == "New England Journal of Medicine"] = "NEJM"
   xj[xj == "American Journal of Epidemiology"] = "AJE"
   a1 <- c(xj, xj)
   a2 <- c(as.numeric(x$pvalue), as.numeric(x$ppv))
-  dat1 <- data.frame(Journal = factor(a1), pvalues = a2, pvalue_type = factor(prob))
-  #dat3 <- as.data.frame(dat2)
-  #colnames(dat2) <- c("Journal","pvalues","Type")
-  #dat2$Journal <- as.factor(dat2$Journal)
-  #dat2$pvalues <- as.numeric(dat2$pvalues)
-  #hist(dat1$pvalues)
-  #dat2$Type<- as.factor(dat2$Type)
- ggplot(dat1, aes(x=pvalues, fill=pvalue_type, color=pvalue_type)) +
-   geom_histogram(position="identity", alpha=0.5) + facet_grid(Journal ~ .)
+  dat1 <- data.frame(Journal = factor(a1), Probability = a2, Values = factor(Values))
+  p <- ggplot(dat1, aes(x=Probability, fill=Values, color=Values)) +
+   geom_histogram(position="identity", alpha=0.5) + facet_grid(Journal ~ .) + xlab("Probability") + ylab("Frequency")
+  p +  theme(axis.text = element_text(face = "bold", size = 16), axis.title = element_text(face = "bold", size = 16),
+             legend.title = element_text(face = "bold", size = 16), legend.text = element_text(face = "bold", size = 16),
+             strip.text = element_text(face = "bold", size = 16)) 
 }

@@ -41,7 +41,7 @@ shinyUI(fluidPage(
       tabsetPanel(type = "tabs",
                   tabPanel("Summary", tableOutput("summary")),
                   tabPanel("Time Trend", plotOutput("plot")),
-                  tabPanel("Histogram", plotOutput("hist")),
+                  tabPanel("Histogram", plotOutput("hist", height=600, width = "100%")),
                   tabPanel("Dataset", DT::dataTableOutput("table"))
       )
     )

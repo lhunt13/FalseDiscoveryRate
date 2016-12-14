@@ -3,7 +3,7 @@ library(ggplot2)
 library(DT)
 library(plyr)
 library(dplyr)
-
+library(RColorBrewer) #PK
 source("makeplots.R") #PK
 source("Hist.R") #PK
 
