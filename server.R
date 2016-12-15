@@ -52,12 +52,21 @@ shinyServer(function(input, output) {
     overallFDRs <- dataInput_FDR()
     FDRbyYEAR <- subset(FDRbyYEAR, journal %in% input$journals & year >= input$years[1] & year <= input$years[2])
     
-    x <- matrix(nrow = length(input$journals), 
+    x <- matrix(nrow = length(input$journals),
                 ncol = as.numeric(input$years[2]) - as.numeric(input$years[1]) + 3)
-    
+
     rownames(x) <- paste(input$journals)
     colnames(x) <- c("Journal",paste(input$years[1]:input$years[2]),paste(overallFDRs$range[1]))
     x[,1] <- input$journals
+    
+    #fill the matrix
+    for(i in 1:length(input$journals)){
+      x[i,2:(length(input$years[1]:input$years[2])+1)] <- FDRbyYEAR$swfdr[FDRbyYEAR$journal == input$journals[i]]
+      FDRs <- overallFDRs$swfdr[overallFDRs$journal == input$journals[i]]
+      x[i,as.numeric(input$years[2]) - as.numeric(input$years[1]) + 3] <- as.character(FDRs[1])
+    }
+    
+
     print(x)
   })
   
