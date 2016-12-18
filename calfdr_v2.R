@@ -70,7 +70,7 @@ calFDR <- function(df){
     return(fdr.stats)
   })
   
-  plot.dat <- data.frame("swfdr" = round(result[1,], 4), "journal" = result[2,],  "range" = result[3,])
+  plot.dat <- data.frame("swfdr" = round(as.numeric(result[1,]), 4), "journal" = result[2,],  "range" = result[3,])
   
   #Data.table part
   result = lapply(df, function(x)
@@ -90,7 +90,7 @@ calFDR <- function(df){
     
     re <- as_data_frame(x)
     re$journal <- row.names(x)
-    re$ppv <- round(out$z, 4) #ppv is posterior pvalue
+    re$ppv <- round(as.numeric(out$z), 4) #ppv is posterior pvalue
     re <- select(re,journal, pvalue, pvalueTruncated, 
                      pubmedID, year, abstract, title, ppv)
     return(re)
@@ -102,5 +102,7 @@ calFDR <- function(df){
   out.results <- inner_join(data.table, plot.dat) %>%
     select(journal, swfdr, pvalue, ppv, pubmedID, year, range)
   out.results <- as.data.frame(out.results)
+  out.results$swfdr <- round(as.numeric(out.results$swfdr), 4)
+  out.results$ppv <- round(as.numeric(out.results$ppv), 4)
   return(out.results)
 }
