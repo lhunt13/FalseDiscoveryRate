@@ -16,9 +16,9 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       
-      p("Select the journal(s) and year(s) for which you want to see the False Discovery Rates. The False
-        Discovery rate is calculated from the significant p-values in the selected papers using the 
-        method"),
+      p("Select the journal(s) and year(s) for which you want to see the Science Wise and Local False Discovery Rates
+        (swfdr, lfdr). The swfdr is calculated both within and across year for each journal. The lfdr is computed only
+        using p-values across year within each journal."),
       
       checkboxGroupInput("journals",
         label = "Select Journal(s)",
