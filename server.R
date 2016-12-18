@@ -61,7 +61,8 @@ shinyServer(function(input, output) {
     
     #fill the matrix
     for(i in 1:length(input$journals)){
-      x[i,2:(length(input$years[1]:input$years[2])+1)] <- FDRbyYEAR$swfdr[FDRbyYEAR$journal == input$journals[i]]
+      x[i,2:(length(input$years[1]:input$years[2])+1)] <- 
+        as.character(round(as.numeric(FDRbyYEAR$swfdr[FDRbyYEAR$journal == input$journals[i]])))
       FDRs <- overallFDRs$swfdr[overallFDRs$journal == input$journals[i]]
       x[i,as.numeric(input$years[2]) - as.numeric(input$years[1]) + 3] <- as.character(FDRs[1])
     }
